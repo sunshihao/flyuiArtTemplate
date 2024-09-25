@@ -39,8 +39,22 @@
                           {
                             "type": "grid",
                             "columns": [
-                               {{each formConfig.items}}
-                  　　　　　　　　{{$value}}{{if $index != formConfig.items.length - 1}},{{/if}}
+
+                               
+                               {{each columns}}
+                               {
+       　　　　　　　　　　　　　　 "md": "3",
+        　　　　　　　　　　　　　　"body": [
+          　　　　　　　　　　　　　　{
+            　　　　　　　　　　　　　　"name": "{{$value.columnName}}",
+                                   　 "label": "{{$value.columnComment}}",
+                                  　  "type": "{{formTagsT[$value.htmlType] || $value.htmlType}}",
+                                 　   "mode": "normal",
+                                 　   "labelAlign": "top"
+         　　　　　　　　　　　　　　　}
+       　　　　　　　　　　　　　　　]
+      　　　　　　　　　　　　　　　}
+                  　　　　　　　　{{if $index != columns.length - 1}},{{/if}}
                　　　　　　　　　{{/each}}
                             ],
                             "gap": "base"
@@ -69,26 +83,7 @@
                                   "level": "primary",
                                   "size": "sm"
                                 },
-                                {
-                                  "type": "button",
-                                  "label": "新建",
-                                  "level": "success",
-                                  "size": "sm",
-                                  "onEvent": {
-                                    "click": {
-                                      "weight": 0,
-                                      "actions": [
-                                        {
-                                          "ignoreError": false,
-                                          "actionType": "drawer",
-                                          "drawer": {
-                                            "$ref": "modal-ref-2"
-                                          }
-                                        }
-                                      ]
-                                    }
-                                  }
-                                },
+                               
                                 {
                                   "type": "reset",
                                   "label": "重置",
@@ -222,28 +217,30 @@
                         {
                           "type": "container",
                           "body": [
-                            {
-                              "type": "select",
-                              "label": "模块前缀",
-                              "name": "select",
-                              "options": [
-                                {
-                                  "label": "LOV",
-                                  "value": "A"
-                                }
-                              ],
-                              "multiple": false,
-                              "mode": "horizontal",
-                              "labelAlign": "right",
-                              "wrapperCustomStyle": {
-                                "width": "250px",
-                                "margin-right": "10px",
-                                "margin-bottom": "0"
-                              }
-                            },
-                            {
+                          {
+                                  "type": "button",
+                                  "label": "新建",
+                                  "level": "success",
+                                  "size": "sm",
+                                  "onEvent": {
+                                    "click": {
+                                      "weight": 0,
+                                      "actions": [
+                                        {
+                                          "ignoreError": false,
+                                          "actionType": "drawer",
+                                          "drawer": {
+                                            "$ref": "modal-ref-2"
+                                          }
+                                        }
+                                      ]
+                                    }
+                                  }
+                                },
+                             {{each options}}
+                               {
                               "type": "button",
-                              "label": "刷新Redis缓存",
+                              "label": "{{$value.text}}",
                               "onEvent": {
                                 "click": {
                                   "actions": []
@@ -251,6 +248,8 @@
                               },
                               "level": "success"
                             }
+                              {{if $index != options.length - 1}},{{/if}}
+                             {{/each}}
                           ],
                           "style": {
                             "position": "relative",
@@ -332,8 +331,12 @@
                 }
               ],
               "columns": [
-                {{each tableConfig.columns}}
-                  {{$value}},
+                {{each columns}}
+                  {
+                    "type": "tpl",
+                    "title": "{{$value.columnComment}}",
+                    "name": "{{$value.columnName}}" 
+                  },
                 {{/each}}
                 {
                   "type": "operation",
@@ -438,8 +441,14 @@
           "dsType": "api",
           "feat": "Insert",
           "body": [
-            {{each tableConfig.options.form.items}}
-              {{$value}}{{if $index != tableConfig.options.form.items.length - 1}},{{/if}}
+            {{each columns}}
+              {
+                "name": "{{$value.columnName}}",
+                "label": "{{$value.columnComment}}",
+                "type": "{{formTagsT[$value.htmlType] || $value.htmlType}}",
+                "colSize": "1/4",
+                "required": true
+              }{{if $index != columns.length - 1}},{{/if}}
             {{/each}}
           ],
           "actions": [

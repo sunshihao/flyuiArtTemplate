@@ -1,7 +1,9 @@
+const { entries } = require("lodash");
+
 exports.tableSetting = {
   code: 0,
   data: {
-    table: {
+    entity: {
       id: 1,
       scene: 1,
       tableName: "system_users",
@@ -23,6 +25,22 @@ exports.tableSetting = {
       dataSourceConfigId: 0,
       createTime: 1710593860000,
       updateTime: 1712900473000,
+      name: "",
+      enable_api: true,
+      enable_audit: true,
+      enable_chatter: false,
+      enable_events: false,
+      enable_files: true,
+      enable_inline_edit: true,
+      enable_instances: false,
+      enable_notes: false,
+      enable_search: true,
+      enable_tasks: false,
+      enable_trash: true,
+      enable_workflow: true,
+      enable_enhanced_lookup: true,
+      icon: "",
+      is_enable: true,
     },
     columns: [
       {

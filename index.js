@@ -18,6 +18,8 @@ const jsonData = yaml.load(yamlString, {
 });
 
 const initFlyUIData = () => {
+  // 模拟码值数据源
+
   // 数据拼接
   const { columns: _columns, table } = tableSetting.data;
 
@@ -39,7 +41,22 @@ const initFlyUIData = () => {
     {
       text: "删除(模板)",
       type: "del",
-    }
+    },
+  ];
+
+  const actions = [
+    {
+      text: "新增(模板)",
+    },
+    {
+      text: "批量删除(模板)",
+    },
+    {
+      text: "导入(模板)",
+    },
+    {
+      text: "导出(模板)",
+    },
   ];
 
   tableOptions = tableOptions.map((item) => {
@@ -144,23 +161,14 @@ const initFlyUIData = () => {
   });
 
   const obj = {
+    formTagsT, // 标签转换
+    columns: _columns, // 顶部
     title: "值列表查询(模板)",
     query: true,
-    formConfig: {
-      split, // 12 等分
-      items,
-    },
-    options: [],
+    options: actions,
     tableConfig: {
       title: "明细(模板)",
-      options: {
-        form: {
-          items: tableItems,
-        },
-      },
       actions: tableOptions,
-      columns, //
-      data: {},
     },
   };
 
