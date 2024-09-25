@@ -5,14 +5,14 @@ const template = require("art-template");
 const yaml = require("js-yaml");
 const schema = yaml.DEFAULT_SCHEMA.extend(require("js-yaml-js-types").all);
 const _ = require("lodash");
-const { holidays } = require("./yaml/holiday");
-const { tableSetting } = require("./source/_data");
+const { holidays } = require("./src/yaml/holiday");
+const { tableSetting } = require("./src/source/_data");
 const { tagsT, formTagsT } = require("./src/gramTrans/tag");
 
 // 初始化 express 应用
 const app = express();
 
-const yamlString = fs.readFileSync(__dirname + "/yaml/holiday.yml", "utf8");
+const yamlString = fs.readFileSync(__dirname + "/src/yaml/holiday.yml", "utf8");
 const jsonData = yaml.load(yamlString, {
   schema,
 });
@@ -82,7 +82,7 @@ const initFlyUIData = () => {
   };
 
   // 整合
-  const html = template(__dirname + "/templates/home.art", obj);
+  const html = template(__dirname + "/src/templates/home.art", obj);
 
   return html;
 };
