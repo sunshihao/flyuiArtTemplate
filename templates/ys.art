@@ -1,0 +1,898 @@
+{
+  "type": "page",
+  "id": "u:d4de43527970",
+  "regions": [
+    "body"
+  ],
+  "body": [
+    {
+      "type": "service",
+      "body": [
+        {
+          "type": "container",
+          "body": [
+            {
+              "id": "u:e537fbdd1ad1",
+              "type": "crud2",
+              "mode": "table2",
+              "dsType": "api",
+              "syncLocation": true,
+              "primaryField": "id",
+              "loadType": "pagination",
+              "api": {
+                "url": "http://111.231.7.32:40001/mock/11/amis/lov_page",
+                "method": "get",
+                "requestAdaptor": "",
+                "adaptor": "",
+                "messages": {},
+                "dataType": "json",
+                "replaceData": false
+              },
+              "filter": {
+                "id": "u:1556dcd479ab",
+                "type": "form",
+                "title": "值列表查询",
+                "mode": "inline",
+                "labelAlign": "top",
+                "dsType": "api",
+                "feat": "Insert",
+                "body": [
+                  {
+                    "type": "collapse-group",
+                    "activeKey": [
+                      "1"
+                    ],
+                    "body": [
+                      {
+                        "type": "collapse",
+                        "key": "1",
+                        "active": true,
+                        "body": [
+                          {
+                            "type": "grid",
+                            "columns": [
+                              {
+                                "body": [
+                                  {
+                                    "name": "lovCode",
+                                    "label": "编码",
+                                    "row": 0,
+                                    "type": "input-text",
+                                    "id": "u:2ceca9331972",
+                                    "colSize": "1/4",
+                                    "body": [
+                                      {
+                                        "type": "input-text",
+                                        "label": "编码",
+                                        "name": "lovCode",
+                                        "id": "u:c924af29e7bf"
+                                      }
+                                    ],
+                                    "wrapperCustomStyle": {},
+                                    "size": "full",
+                                    "mode": "normal",
+                                    "labelAlign": "top"
+                                  }
+                                ],
+                                "id": "u:f392de754f4e",
+                                "md": ""
+                              },
+                              {
+                                "body": [
+                                  {
+                                    "type": "input-text",
+                                    "label": "名称",
+                                    "name": "text",
+                                    "id": "u:e3cd991b5e10",
+                                    "size": "full",
+                                    "mode": "normal",
+                                    "labelAlign": "top"
+                                  }
+                                ],
+                                "id": "u:10696b25b693",
+                                "md": ""
+                              },
+                              {
+                                "body": [
+                                  {
+                                    "type": "select",
+                                    "label": "状态",
+                                    "name": "enableFlag",
+                                    "id": "u:efdc3ff236d7",
+                                    "multiple": false,
+                                    "source": "${LOV_LOC_type}",
+                                    "size": "full",
+                                    "mode": "normal",
+                                    "labelAlign": "top"
+                                  }
+                                ],
+                                "id": "u:78056e76ec7e"
+                              },
+                              {
+                                "body": [
+                                  {
+                                    "type": "select",
+                                    "label": "分类",
+                                    "name": "lovCategoryId",
+                                    "id": "u:14fa928b480d",
+                                    "multiple": false,
+                                    "source": "${lovType.lineDTOS}",
+                                    "labelField": "lovName",
+                                    "valueField": "lovLineId",
+                                    "size": "full",
+                                    "mode": "normal",
+                                    "labelAlign": "top"
+                                  }
+                                ],
+                                "id": "u:38b443b7105d"
+                              }
+                            ],
+                            "id": "u:734bf9ef219a",
+                            "gap": "base"
+                          }
+                        ],
+                        "id": "u:3121e85dcff4",
+                        "header": {
+                          "type": "container",
+                          "body": [
+                            {
+                              "type": "tpl",
+                              "tpl": "值列表查询",
+                              "inline": true,
+                              "wrapperComponent": "",
+                              "id": "u:a5a1eaad0494",
+                              "className": "page_title",
+                              "wrapperCustomStyle": {
+                                "root": {
+                                  "padding-left": "\"6px\""
+                                }
+                              }
+                            },
+                            {
+                              "type": "button-toolbar",
+                              "buttons": [
+                                {
+                                  "type": "submit",
+                                  "label": "查询",
+                                  "level": "primary",
+                                  "id": "u:8dd863eef9d6",
+                                  "size": "sm"
+                                },
+                                {
+                                  "type": "button",
+                                  "label": "新建",
+                                  "level": "success",
+                                  "id": "u:c3376cea741e",
+                                  "size": "sm",
+                                  "onEvent": {
+                                    "click": {
+                                      "weight": 0,
+                                      "actions": [
+                                        {
+                                          "ignoreError": false,
+                                          "actionType": "drawer",
+                                          "drawer": {
+                                            "$ref": "modal-ref-2"
+                                          }
+                                        }
+                                      ]
+                                    }
+                                  }
+                                },
+                                {
+                                  "type": "reset",
+                                  "label": "重置",
+                                  "id": "u:465afc75edea",
+                                  "size": "sm"
+                                }
+                              ],
+                              "id": "u:f74464864bf7",
+                              "mode": "inline",
+                              "labelClassName": "",
+                              "className": "",
+                              "inputClassName": ""
+                            }
+                          ],
+                          "style": {
+                            "position": "relative",
+                            "display": "flex",
+                            "inset": "auto",
+                            "flexWrap": "nowrap",
+                            "flexDirection": "row",
+                            "alignItems": "center"
+                          },
+                          "size": "none",
+                          "wrapperBody": false,
+                          "id": "u:6706139965e5",
+                          "isFixedHeight": false,
+                          "isFixedWidth": false,
+                          "wrapperCustomStyle": {
+                            "root": {
+                              "flex": "1",
+                              "display": "flex",
+                              "flex-direction": "row",
+                              "align-items": "center",
+                              "justify-content": "space-between"
+                            }
+                          }
+                        },
+                        "headingClassName": "page_collapse_head",
+                        "className": "page_collapse page_collapse_body",
+                        "bodyClassName": "page_collapse_content"
+                      }
+                    ],
+                    "id": "u:b5dbe7d8bd2c",
+                    "expandIconPosition": "right",
+                    "className": "page_collapse"
+                  }
+                ],
+                "resetAfterSubmit": false,
+                "columnCount": 4,
+                "clearValueOnHidden": true,
+                "wrapWithPanel": false,
+                "behavior": [
+                  "SimpleQuery"
+                ],
+                "actions": [
+                  {
+                    "type": "submit",
+                    "label": "查询",
+                    "onEvent": {},
+                    "level": "primary",
+                    "id": "u:c7642f9f9a95"
+                  },
+                  {
+                    "type": "button",
+                    "label": "新建",
+                    "onEvent": {
+                      "click": {
+                        "actions": [
+                          {
+                            "ignoreError": false,
+                            "actionType": "drawer",
+                            "drawer": {
+                              "$ref": "modal-ref-2"
+                            }
+                          }
+                        ]
+                      }
+                    },
+                    "id": "u:232e06cc0ca4",
+                    "level": "success"
+                  },
+                  {
+                    "type": "button",
+                    "label": "重置",
+                    "onEvent": {
+                      "click": {
+                        "weight": 0,
+                        "actions": [
+                          {
+                            "componentId": "u:1556dcd479ab",
+                            "ignoreError": false,
+                            "actionType": "reset"
+                          }
+                        ]
+                      }
+                    },
+                    "level": "default",
+                    "id": "u:4063af0d4884"
+                  }
+                ]
+              },
+              "headerToolbar": [
+                {
+                  "type": "flex",
+                  "direction": "row",
+                  "justify": "flex-start",
+                  "alignItems": "stretch",
+                  "style": {
+                    "position": "static"
+                  },
+                  "items": [
+                    {
+                      "type": "container",
+                      "align": "left",
+                      "behavior": [
+                        "Insert",
+                        "BulkEdit",
+                        "BulkDelete"
+                      ],
+                      "body": [
+                        {
+                          "type": "container",
+                          "body": [
+                            {
+                              "type": "tpl",
+                              "tpl": "明细",
+                              "inline": true,
+                              "wrapperComponent": "",
+                              "id": "u:46617b57eee5",
+                              "className": "page_title"
+                            }
+                          ],
+                          "style": {
+                            "position": "relative",
+                            "display": "flex",
+                            "inset": "auto",
+                            "flexWrap": "nowrap",
+                            "flexDirection": "column",
+                            "alignItems": "flex-start"
+                          },
+                          "size": "none",
+                          "wrapperBody": false,
+                          "id": "u:2b3915c95112"
+                        },
+                        {
+                          "type": "container",
+                          "body": [
+                            {
+                              "type": "select",
+                              "label": "模块前缀",
+                              "name": "select",
+                              "options": [
+                                {
+                                  "label": "LOV",
+                                  "value": "A"
+                                }
+                              ],
+                              "id": "u:7ed039781c14",
+                              "multiple": false,
+                              "mode": "horizontal",
+                              "labelAlign": "right",
+                              "wrapperCustomStyle": {
+                                "width": "250px",
+                                "margin-right": "10px",
+                                "margin-bottom": "0"
+                              },
+                              "themeCss": {
+                                "selectControlClassName": {
+                                  "padding-and-margin:default": {}
+                                },
+                                "selectPopoverClassName": {
+                                  "padding-and-margin:default": {}
+                                }
+                              }
+                            },
+                            {
+                              "type": "button",
+                              "label": "刷新Redis缓存",
+                              "onEvent": {
+                                "click": {
+                                  "actions": []
+                                }
+                              },
+                              "id": "u:71f9c71b6d45",
+                              "level": "success"
+                            }
+                          ],
+                          "style": {
+                            "position": "relative",
+                            "display": "flex",
+                            "flex": "0 0 auto",
+                            "inset": "auto",
+                            "flexWrap": "nowrap",
+                            "alignItems": "baseline"
+                          },
+                          "size": "none",
+                          "wrapperBody": false,
+                          "id": "u:c6952241584d",
+                          "isFixedHeight": false
+                        }
+                      ],
+                      "wrapperBody": false,
+                      "style": {
+                        "flex": "1 1 auto",
+                        "position": "static",
+                        "display": "flex",
+                        "flexWrap": "nowrap",
+                        "justifyContent": "space-between",
+                        "alignItems": "baseline",
+                        "flexGrow": 1
+                      },
+                      "id": "u:5fbdcd449174",
+                      "isFixedHeight": false,
+                      "wrapperCustomStyle": {
+                        "height": "auto"
+                      }
+                    }
+                  ],
+                  "id": "u:60c5d7ebd184"
+                }
+              ],
+              "footerToolbar": [
+                {
+                  "type": "flex",
+                  "direction": "row",
+                  "justify": "flex-start",
+                  "alignItems": "stretch",
+                  "style": {
+                    "position": "static"
+                  },
+                  "items": [
+                    {
+                      "type": "container",
+                      "align": "right",
+                      "body": [
+                        {
+                          "type": "pagination",
+                          "behavior": "Pagination",
+                          "layout": [
+                            "total",
+                            "perPage",
+                            "pager"
+                          ],
+                          "perPage": 10,
+                          "perPageAvailable": [
+                            10,
+                            20,
+                            50,
+                            100
+                          ],
+                          "align": "right",
+                          "id": "u:e512032913c8"
+                        }
+                      ],
+                      "wrapperBody": false,
+                      "style": {
+                        "flexGrow": 1,
+                        "flex": "1 1 auto",
+                        "position": "static",
+                        "display": "flex",
+                        "flexBasis": "auto",
+                        "flexDirection": "row",
+                        "flexWrap": "nowrap",
+                        "alignItems": "stretch",
+                        "justifyContent": "flex-end"
+                      },
+                      "id": "u:76f3fabfc011"
+                    }
+                  ],
+                  "id": "u:fa19a2e8aa01"
+                }
+              ],
+              "columns": [
+                {
+                  "type": "tpl",
+                  "title": "编码",
+                  "name": "lovCode",
+                  "id": "u:c8bfd12a6112"
+                },
+                {
+                  "type": "tpl",
+                  "title": "名称",
+                  "name": "lovName",
+                  "id": "u:6850a1a7542a"
+                },
+                {
+                  "type": "tpl",
+                  "title": "描述",
+                  "name": "lovDesc",
+                  "id": "u:12b622264665"
+                },
+                {
+                  "type": "tpl",
+                  "title": "分类",
+                  "name": "lovCategoryId",
+                  "id": "u:c529c302e001",
+                  "tpl": "${ARRAYFIND(lovType.lineDTOS, item => item.lovLineId === lovCategoryId).lovName}",
+                  "wrapperComponent": ""
+                },
+                {
+                  "type": "tpl",
+                  "title": "类型",
+                  "name": "lovTypeId",
+                  "id": "u:8242cb361081",
+                  "tpl": "${ARRAYFIND(LOV_LOC_type, item => item.value === lovTypeId).label}",
+                  "wrapperComponent": ""
+                },
+                {
+                  "type": "tpl",
+                  "title": "有效标识",
+                  "name": "enableFlag",
+                  "id": "u:00e9b4be2864",
+                  "tpl": "${IF(enableFlag === 'Y','是','否') }",
+                  "wrapperComponent": ""
+                },
+                {
+                  "type": "operation",
+                  "title": "操作",
+                  "buttons": [
+                    {
+                      "type": "button",
+                      "label": "查看",
+                      "level": "link",
+                      "behavior": "View",
+                      "onEvent": {
+                        "click": {
+                          "actions": []
+                        }
+                      },
+                      "id": "u:9d5241f3680b"
+                    },
+                    {
+                      "type": "button",
+                      "label": "编辑",
+                      "level": "link",
+                      "behavior": "Edit",
+                      "onEvent": {
+                        "click": {
+                          "actions": [
+                            {
+                              "actionType": "drawer",
+                              "drawer": {
+                                "$ref": "modal-ref-2"
+                              }
+                            }
+                          ]
+                        }
+                      },
+                      "id": "u:19e5404fcc82"
+                    },
+                    {
+                      "label": "设置",
+                      "level": "link",
+                      "id": "u:27074256a834"
+                    },
+                    {
+                      "label": "翻译",
+                      "level": "link",
+                      "id": "u:63f3b97d914d",
+                      "onEvent": {
+                        "click": {
+                          "weight": 0,
+                          "actions": [
+                            {
+                              "ignoreError": false,
+                              "actionType": "drawer",
+                              "drawer": {
+                                "$ref": "modal-ref-1"
+                              }
+                            }
+                          ]
+                        }
+                      }
+                    },
+                    {
+                      "type": "button",
+                      "label": "删除",
+                      "behavior": "Delete",
+                      "className": "m-r-xs text-danger",
+                      "level": "link",
+                      "confirmText": "确认要删除数据",
+                      "onEvent": {
+                        "click": {
+                          "actions": [
+                            {
+                              "actionType": "ajax",
+                              "api": "",
+                              "data": {
+                                "&": "$$"
+                              }
+                            },
+                            {
+                              "actionType": "search",
+                              "groupType": "component",
+                              "componentId": "u:e537fbdd1ad1"
+                            }
+                          ]
+                        }
+                      },
+                      "id": "u:fef28ffc872a"
+                    }
+                  ],
+                  "id": "u:f8c9874035ce"
+                }
+              ],
+              "showHeader": true,
+              "title": null,
+              "resizable": true
+            }
+          ],
+          "style": {
+            "position": "relative",
+            "display": "block",
+            "inset": "auto"
+          },
+          "size": "none",
+          "wrapperBody": false,
+          "id": "u:5af67407ef4c",
+          "isFixedHeight": false,
+          "isFixedWidth": false,
+          "onEvent": {}
+        }
+      ],
+      "id": "u:ac2ab881822b",
+      "dsType": "api",
+      "api": {
+        "url": "http://111.231.7.32:40001/mock/11/amis/lov_category",
+        "method": "get",
+        "requestAdaptor": "",
+        "adaptor": "return {\r\n  status: 0,\r\n  msg: '请求成功',\r\n  data: {\r\n    lovType: payload\r\n  }\r\n}",
+        "messages": {},
+        "silent": false
+      }
+    }
+  ],
+  "pullRefresh": {
+    "disabled": true
+  },
+  "definitions": {
+    "modal-ref-1": {
+      "type": "drawer",
+      "body": [
+        {
+          "id": "u:af40c834439b",
+          "type": "crud2",
+          "mode": "table2",
+          "dsType": "api",
+          "syncLocation": true,
+          "primaryField": "id",
+          "loadType": "pagination",
+          "headerToolbar": [],
+          "footerToolbar": [],
+          "columns": [
+            {
+              "type": "tpl",
+              "title": "列名",
+              "name": "lovField",
+              "id": "u:8391a590cd37"
+            },
+            {
+              "type": "tpl",
+              "title": "对照值",
+              "name": "name",
+              "id": "u:bff5675f941c"
+            },
+            {
+              "type": "tpl",
+              "title": "中文",
+              "name": "name",
+              "id": "u:b0c12af5beed"
+            },
+            {
+              "type": "tpl",
+              "title": "English",
+              "name": "name",
+              "id": "u:0898eada292d"
+            },
+            {
+              "type": "tpl",
+              "title": "日本语",
+              "name": "name",
+              "id": "u:065fc73f4b09"
+            }
+          ],
+          "editorSetting": {
+            "mock": {
+              "enable": false,
+              "maxDisplayRows": 2
+            }
+          },
+          "api": {
+            "url": "http://111.231.7.32:40001/mock/11/amis/translate",
+            "method": "get",
+            "requestAdaptor": "",
+            "adaptor": "",
+            "messages": {}
+          }
+        }
+      ],
+      "title": "翻译",
+      "id": "u:4dce42a3f564",
+      "actions": [
+        {
+          "type": "button",
+          "actionType": "cancel",
+          "label": "取消",
+          "id": "u:fa669d3a5a6f"
+        },
+        {
+          "type": "button",
+          "actionType": "confirm",
+          "label": "确定",
+          "primary": true,
+          "id": "u:e4b14a930a07"
+        }
+      ],
+      "showCloseButton": true,
+      "closeOnOutside": false,
+      "closeOnEsc": false,
+      "showErrorMsg": true,
+      "showLoading": true,
+      "draggable": false,
+      "actionType": "drawer"
+    },
+    "modal-ref-2": {
+      "type": "drawer",
+      "body": [
+        {
+          "id": "u:1939b4056ada",
+          "type": "form",
+          "title": "表单",
+          "mode": "flex",
+          "labelAlign": "top",
+          "dsType": "api",
+          "feat": "Insert",
+          "body": [
+            {
+              "name": "lovCode",
+              "label": "编码",
+              "row": 0,
+              "type": "input-text",
+              "id": "u:bbc886256bd6",
+              "colSize": "1/2",
+              "required": true
+            },
+            {
+              "name": "lovName",
+              "label": "名称",
+              "row": 0,
+              "type": "input-text",
+              "id": "u:f02260ebe15f",
+              "colSize": "1/2",
+              "required": true
+            },
+            {
+              "name": "lovDesc",
+              "label": "描述",
+              "row": 1,
+              "type": "input-text",
+              "id": "u:c366427c022e",
+              "colSize": "1"
+            },
+            {
+              "type": "select",
+              "label": "分类",
+              "name": "lovCategoryId",
+              "row": 2,
+              "id": "u:0f0503f5fbe6",
+              "multiple": false,
+              "source": "${lovType.lineDTOS}",
+              "labelField": "lovName",
+              "valueField": "lovLineId",
+              "required": true
+            },
+            {
+              "type": "select",
+              "label": "类型",
+              "name": "lovTypeId",
+              "id": "u:782a7b7e9b93",
+              "multiple": false,
+              "required": true,
+              "source": "${LOV_LOC_type}"
+            },
+            {
+              "name": "6",
+              "label": "脚本",
+              "row": 3,
+              "type": "input-text",
+              "id": "u:8a27d0467004",
+              "colSize": "1/2",
+              "disabled": true
+            },
+            {
+              "name": "7",
+              "label": "来源系统",
+              "row": 4,
+              "type": "input-text",
+              "id": "u:f1d860e19134",
+              "colSize": "1/2"
+            },
+            {
+              "name": "enableFlag",
+              "label": "有效标识",
+              "row": 4,
+              "type": "switch",
+              "id": "u:6020a7c51dba",
+              "colSize": "1/2",
+              "trueValue": "Y",
+              "falseValue": "N"
+            },
+            {
+              "name": "9",
+              "label": "使用Value",
+              "row": 5,
+              "type": "switch",
+              "id": "u:79e2c1eb0438",
+              "colSize": "1/2"
+            }
+          ],
+          "actions": [
+            {
+              "type": "button",
+              "label": "取消",
+              "onEvent": {
+                "click": {
+                  "actions": [
+                    {
+                      "actionType": "cancel",
+                      "componentId": "u:1939b4056ada"
+                    }
+                  ]
+                }
+              },
+              "level": "default"
+            },
+            {
+              "type": "button",
+              "label": "提交",
+              "onEvent": {
+                "click": {
+                  "actions": [
+                    {
+                      "actionType": "submit",
+                      "componentId": "u:1939b4056ada"
+                    }
+                  ]
+                }
+              },
+              "level": "primary"
+            }
+          ],
+          "resetAfterSubmit": true
+        }
+      ],
+      "title": "",
+      "id": "u:010f0fbe53d5",
+      "actions": [
+        {
+          "type": "button",
+          "actionType": "cancel",
+          "label": "取消",
+          "id": "u:4b01e04176d8"
+        },
+        {
+          "type": "button",
+          "actionType": "confirm",
+          "label": "确定",
+          "primary": true,
+          "id": "u:f5959bae8b6d"
+        }
+      ],
+      "actionType": "drawer",
+      "showCloseButton": true,
+      "closeOnOutside": false,
+      "closeOnEsc": false,
+      "showErrorMsg": true,
+      "showLoading": true,
+      "draggable": false,
+      "resizable": false,
+      "editorSetting": {
+        "displayName": "Dialog_edit"
+      }
+    }
+  },
+  "onEvent": {},
+  "data": {
+    "LOV_LOC_type": [
+      {
+        "label": "默认",
+        "value": "1"
+      },
+      {
+        "label": "SQL",
+        "value": "2"
+      }
+    ]
+  },
+  "wrapperCustomStyle": {
+    ".page_title": {
+      "font-weight": "550",
+      "font-size": "18px"
+    },
+    ".page_collapse_head": {
+      "width": "100%",
+      "border-bottom": "2px solid #f7f7f9"
+    },
+    ".page_collapse_content": {
+      "padding": "20px"
+    },
+    ".page_collapse_body": {
+      "border-bottom": "10px solid #F4F5F7"
+    },
+    ".page_collapse": {
+      "width": "100%"
+    }
+  }
+}
