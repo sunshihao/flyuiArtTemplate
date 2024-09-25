@@ -21,6 +21,88 @@ const initFlyUIData = () => {
   // 数据拼接
   const { columns: _columns, table } = tableSetting.data;
 
+  // 数据源table行编辑
+  let tableOptions = [
+    {
+      text: "查看(模板)",
+    },
+    {
+      text: "编辑(模板)",
+      type: "edit",
+    },
+    {
+      text: "设置(模板)",
+    },
+    {
+      text: "翻译(模板)",
+    },
+    {
+      text: "删除(模板)",
+      type: "del",
+    }
+  ];
+
+  tableOptions = tableOptions.map((item) => {
+    if (item.type == "edit") {
+      return {
+        type: "button",
+        label: item.text,
+        level: "link",
+        behavior: "Edit",
+        onEvent: {
+          click: {
+            actions: [
+              {
+                actionType: "drawer",
+                drawer: {
+                  $ref: "modal-ref-2", // 固定弹窗
+                },
+              },
+            ],
+          },
+        },
+      };
+    }
+
+    if (item.type == "del") {
+      return {
+        type: "button",
+        label: item.text,
+        behavior: "Delete",
+        className: "m-r-xs text-danger",
+        level: "link",
+        confirmText: "确认要删除数据",
+        onEvent: {
+          click: {
+            actions: [
+              {
+                actionType: "ajax",
+                data: {
+                  "&": "$$",
+                },
+              },
+              {
+                actionType: "search",
+                groupType: "component",
+                componentId: "u:e537fbdd1ad1",
+              },
+            ],
+          },
+        },
+      };
+    }
+    return {
+      type: "button",
+      label: item.text,
+      level: "link",
+      onEvent: {
+        click: {
+          actions: [],
+        },
+      },
+    };
+  });
+
   const items = [];
 
   const tableItems = [];
@@ -53,8 +135,9 @@ const initFlyUIData = () => {
       });
     }
 
+    // 理论仅展示
     return {
-      type: tagsT[item.htmlType] || "tpl", // 类型转换
+      type: "tpl", // 类型转换
       title: item.columnComment,
       name: item.columnName,
     };
@@ -67,15 +150,15 @@ const initFlyUIData = () => {
       split, // 12 等分
       items,
     },
+    options: [],
     tableConfig: {
       title: "明细(模板)",
       options: {
         form: {
-          split: tableSplit,
           items: tableItems,
         },
       },
-      actions: [],
+      actions: tableOptions,
       columns, //
       data: {},
     },
@@ -87,48 +170,13 @@ const initFlyUIData = () => {
   return html;
 };
 
-// 设置一个简单的路由 template/home
+//
 app.get("/", (req, res) => {
   res.send(initFlyUIData());
 });
 
-app.get("/yaml/holiday", (req, res) => {
-  res.send(jsonData);
-});
-
-// fetch
-
 // 设置端口号
 const port = 3000;
-
-const initT = (uiSchema) => {
-  _.each(uiSchema.fields, (field) => {
-    try {
-      if (
-        field.type === "lookup" &&
-        field._reference_to &&
-        _.isString(field._reference_to)
-      ) {
-        field.reference_to = eval(`(${field._reference_to})`)();
-      }
-    } catch (exception) {
-      field.reference_to = undefined;
-      console.error(exception);
-    }
-  });
-  _.each(uiSchema.list_views, (v, k) => {
-    v.name = k;
-    if (!_.has(v, "columns")) {
-      v.columns = uiSchema.list_views.all.columns;
-    }
-  });
-
-  return uiSchema;
-};
-
-app.get("/demo", (req, res) => {
-  res.send(initT(holidays));
-});
 
 // 启动服务器并监听端口
 app.listen(port, () => {

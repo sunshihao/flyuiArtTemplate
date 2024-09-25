@@ -1,0 +1,21 @@
+{
+  "wrapperCustomStyle": {
+    ".page_title": {
+      "font-weight": "550",
+      "font-size": "18px"
+    },
+    ".page_collapse_head": {
+      "width": "100%",
+      "border-bottom": "2px solid #f7f7f9"
+    },
+    ".page_collapse_content": {
+      "padding": "20px"
+    },
+    ".page_collapse_body": {
+      "border-bottom": "10px solid #F4F5F7"
+    },
+    ".page_collapse": {
+      "width": "100%"
+    }
+  }
+}

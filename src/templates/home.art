@@ -40,7 +40,7 @@
                             "type": "grid",
                             "columns": [
                                {{each formConfig.items}}
-                  　　　　　　　　{{$value}},
+                  　　　　　　　　{{$value}}{{if $index != formConfig.items.length - 1}},{{/if}}
                　　　　　　　　　{{/each}}
                             ],
                             "gap": "base"
@@ -339,82 +339,9 @@
                   "type": "operation",
                   "title": "操作",
                   "buttons": [
-                    {
-                      "type": "button",
-                      "label": "查看",
-                      "level": "link",
-                      "behavior": "View",
-                      "onEvent": {
-                        "click": {
-                          "actions": []
-                        }
-                      }
-                    },
-                    {
-                      "type": "button",
-                      "label": "编辑",
-                      "level": "link",
-                      "behavior": "Edit",
-                      "onEvent": {
-                        "click": {
-                          "actions": [
-                            {
-                              "actionType": "drawer",
-                              "drawer": {
-                                "$ref": "modal-ref-2"
-                              }
-                            }
-                          ]
-                        }
-                      }
-                    },
-                    {
-                      "label": "设置",
-                      "level": "link"
-                    },
-                    {
-                      "label": "翻译",
-                      "level": "link",
-                      "onEvent": {
-                        "click": {
-                          "weight": 0,
-                          "actions": [
-                            {
-                              "ignoreError": false,
-                              "actionType": "drawer",
-                              "drawer": {
-                                "$ref": "modal-ref-1"
-                              }
-                            }
-                          ]
-                        }
-                      }
-                    },
-                    {
-                      "type": "button",
-                      "label": "删除",
-                      "behavior": "Delete",
-                      "className": "m-r-xs text-danger",
-                      "level": "link",
-                      "confirmText": "确认要删除数据",
-                      "onEvent": {
-                        "click": {
-                          "actions": [
-                            {
-                              "actionType": "ajax",
-                              "data": {
-                                "&": "$$"
-                              }
-                            },
-                            {
-                              "actionType": "search",
-                              "groupType": "component",
-                              "componentId": "u:e537fbdd1ad1"
-                            }
-                          ]
-                        }
-                      }
-                    }
+                    {{each tableConfig.actions}}
+                      {{$value}}{{if $index != tableConfig.actions.length - 1}},{{/if}}
+                    {{/each}}
                   ]
                 }
               ],
@@ -512,7 +439,7 @@
           "feat": "Insert",
           "body": [
             {{each tableConfig.options.form.items}}
-              {{$value}},
+              {{$value}}{{if $index != tableConfig.options.form.items.length - 1}},{{/if}}
             {{/each}}
           ],
           "actions": [
