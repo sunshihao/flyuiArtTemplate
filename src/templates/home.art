@@ -1,358 +1,359 @@
+
+{{ set _queryFormList = source.columns.filter(item => item.searchable) || [] }}
+{{ set _editFormList = source.columns.filter(item => !item.hidden) || [] }}
 {
   "type": "page",
   "regions": [
     "body"
   ],
-  "body": [
-    {
-              "type": "crud2",
-              "mode": "table2",
-              "dsType": "api",
-              "syncLocation": true,
-              "primaryField": "id",
-              "loadType": "pagination",
-              "api": {
-                "url": "http://111.231.7.32:40001/mock/11/amis/lov_page",
-                "method": "get",
-                "dataType": "json",
-                "replaceData": false
-              },
-              "filter": {
-                "type": "form",
-                "title": "{{title}}",
-                "mode": "inline",
-                "labelAlign": "top",
-                "dsType": "api",
-                "feat": "Insert",
+  "body": {
+    "type": "crud2",
+    "mode": "table2",
+    "dsType": "api",
+    "syncLocation": true,
+    "primaryField": "id",
+    "loadType": "pagination",
+    "api": {
+        "url": "http://111.231.7.32:40001/mock/11/amis/lov_page",
+        "method": "get",
+        "dataType": "json",
+        "replaceData": false
+    },
+    "filter": {
+        "type": "form",
+        "title": "{{title}}",
+        "mode": "inline",
+        "labelAlign": "top",
+        "dsType": "api",
+        "feat": "Insert",
+        "body": [
+          {
+            "type": "collapse-group",
+            "activeKey": [
+              "1"
+            ],
+            "body": [
+              {
+                "type": "collapse",
+                "key": "1",
+                "active": true,
                 "body": [
                   {
-                    "type": "collapse-group",
-                    "activeKey": [
-                      "1"
-                    ],
-                    "body": [
-                      {
-                        "type": "collapse",
-                        "key": "1",
-                        "active": true,
-                        "body": [
-                          {
-                            "type": "grid",
-                            "columns": [
-
-                               
-                               {{each columns}}
-                               {
-       　　　　　　　　　　　　　　 "md": "3",
-        　　　　　　　　　　　　　　"body": [
-          　　　　　　　　　　　　　　{
-            　　　　　　　　　　　　　　"name": "{{$value.columnName}}",
-                                   　 "label": "{{$value.columnComment}}",
-                                  　  "type": "{{formTagsT[$value.htmlType] || $value.htmlType}}",
-                                 　   "mode": "normal",
-                                 　   "labelAlign": "top"
-         　　　　　　　　　　　　　　　}
-       　　　　　　　　　　　　　　　]
-      　　　　　　　　　　　　　　　}
-                  　　　　　　　　{{if $index != columns.length - 1}},{{/if}}
-               　　　　　　　　　{{/each}}
-                            ],
-                            "gap": "base"
-                          }
-                        ],
-                        "header": {
-                          "type": "container",
+                    "type": "grid",
+                    "columns": [
+                      {{each _queryFormList}}
+                        {
+                          "md": "3",
                           "body": [
                             {
-                              "type": "tpl",
-                              "tpl": "{{title}}",
-                              "inline": true,
-                              "className": "page_title",
-                              "wrapperCustomStyle": {
-                                "root": {
-                                  "padding-left": "\"6px\""
-                                }
-                              }
-                            },
-                            {
-                              "type": "button-toolbar",
-                              "buttons": [
-                                {
-                                  "type": "submit",
-                                  "label": "查询",
-                                  "level": "primary",
-                                  "size": "sm"
-                                },
-                               
-                                {
-                                  "type": "reset",
-                                  "label": "重置",
-                                  "size": "sm"
-                                }
-                              ],
-                              "mode": "inline"
+                              "name": "{{$value.columnName}}",
+                              "label": "{{$value.columnComment}}",
+                              "type": "{{formTagsT[$value.htmlType] || $value.htmlType}}",
+                              {{if $value.options}} "source": "${<%= $value.options %>}", {{/if}}
+                              "mode": "normal",
+                              "labelAlign": "top"
                             }
-                          ],
-                          "style": {
-                            "position": "relative",
-                            "display": "flex",
-                            "inset": "auto",
-                            "flexWrap": "nowrap",
-                            "flexDirection": "row",
-                            "alignItems": "center"
-                          },
-                          "size": "none",
-                          "wrapperBody": false,
-                          "isFixedHeight": false,
-                          "isFixedWidth": false,
-                          "wrapperCustomStyle": {
-                            "root": {
-                              "flex": "1",
-                              "display": "flex",
-                              "flex-direction": "row",
-                              "align-items": "center",
-                              "justify-content": "space-between"
-                            }
-                          }
-                        },
-                        "headingClassName": "page_collapse_head",
-                        "className": "page_collapse page_collapse_body",
-                        "bodyClassName": "page_collapse_content"
-                      }
+                          ]
+                        }
+                        {{if $index != _queryFormList.length - 1}},{{/if}}
+                      {{/each}}
                     ],
-                    "expandIconPosition": "right",
-                    "className": "page_collapse"
+                    "gap": "base"
                   }
                 ],
-                "resetAfterSubmit": false,
-                "columnCount": 4,
-                "clearValueOnHidden": true,
-                "wrapWithPanel": false,
-                "behavior": [
-                  "SimpleQuery"
-                ],
+                "header": {
+                  "type": "container",
+                  "body": [
+                    {
+                      "type": "tpl",
+                      "tpl": "{{title}}",
+                      "inline": true,
+                      "className": "page_title",
+                      "wrapperCustomStyle": {
+                        "root": {
+                          "padding-left": "\"6px\""
+                        }
+                      }
+                    },
+                    {
+                      "type": "button-toolbar",
+                      "buttons": [
+                        {
+                          "type": "submit",
+                          "label": "查询",
+                          "level": "primary",
+                          "size": "sm"
+                        },
+                        {
+                          "type": "reset",
+                          "label": "重置",
+                          "size": "sm"
+                        }
+                      ],
+                      "mode": "inline"
+                    }
+                  ],
+                  "style": {
+                    "position": "relative",
+                    "display": "flex",
+                    "inset": "auto",
+                    "flexWrap": "nowrap",
+                    "flexDirection": "row",
+                    "alignItems": "center"
+                  },
+                  "size": "none",
+                  "wrapperBody": false,
+                  "isFixedHeight": false,
+                  "isFixedWidth": false,
+                  "wrapperCustomStyle": {
+                    "root": {
+                      "flex": "1",
+                      "display": "flex",
+                      "flex-direction": "row",
+                      "align-items": "center",
+                      "justify-content": "space-between"
+                    }
+                  }
+                },
+                "headingClassName": "page_collapse_head",
+                "className": "page_collapse page_collapse_body",
+                "bodyClassName": "page_collapse_content"
+              }
+            ],
+            "expandIconPosition": "right",
+            "className": "page_collapse"
+          }
+        ],
+        "resetAfterSubmit": false,
+        "columnCount": 4,
+        "clearValueOnHidden": true,
+        "wrapWithPanel": false,
+        "behavior": [
+          "SimpleQuery"
+        ],
+        "actions": [
+          {
+            "type": "submit",
+            "label": "查询",
+            "level": "primary"
+          },
+          {
+            "type": "button",
+            "label": "新建",
+            "onEvent": {
+              "click": {
                 "actions": [
                   {
-                    "type": "submit",
-                    "label": "查询",
-                    "level": "primary"
-                  },
-                  {
-                    "type": "button",
-                    "label": "新建",
-                    "onEvent": {
-                      "click": {
-                        "actions": [
-                          {
-                            "ignoreError": false,
-                            "actionType": "drawer",
-                            "drawer": {
-                              "$ref": "modal-ref-2"
-                            }
-                          }
-                        ]
-                      }
-                    },
-                    "level": "success"
-                  },
-                  {
-                    "type": "button",
-                    "label": "重置",
-                    "onEvent": {
-                      "click": {
-                        "weight": 0,
-                        "actions": [
-                          {
-                            "componentId": "u:1556dcd479ab",
-                            "ignoreError": false,
-                            "actionType": "reset"
-                          }
-                        ]
-                      }
-                    },
-                    "level": "default"
+                    "ignoreError": false,
+                    "actionType": "drawer",
+                    "drawer": {
+                      "$ref": "modal-ref-2"
+                    }
                   }
                 ]
-              },
-              "headerToolbar": [
-                {
-                  "type": "flex",
-                  "direction": "row",
-                  "justify": "flex-start",
-                  "alignItems": "stretch",
-                  "style": {
-                    "position": "static"
-                  },
-                  "items": [
-                    {
-                      "type": "container",
-                      "align": "left",
-                      "behavior": [
-                        "Insert",
-                        "BulkEdit",
-                        "BulkDelete"
-                      ],
-                      "body": [
-                        {
-                          "type": "container",
-                          "body": [
-                            {
-                              "type": "tpl",
-                              {{if tableConfig.title}} "tpl": "{{tableConfig.title}}", {{/if}}
-                              "inline": true,
-                              "className": "page_title"
-                            }
-                          ],
-                          "style": {
-                            "position": "relative",
-                            "display": "flex",
-                            "inset": "auto",
-                            "flexWrap": "nowrap",
-                            "flexDirection": "column",
-                            "alignItems": "flex-start"
-                          },
-                          "size": "none",
-                          "wrapperBody": false
-                        },
-                        {
-                          "type": "container",
-                          "body": [
-                          {
-                                  "type": "button",
-                                  "label": "新建",
-                                  "level": "success",
-                                  "size": "sm",
-                                  "onEvent": {
-                                    "click": {
-                                      "weight": 0,
-                                      "actions": [
-                                        {
-                                          "ignoreError": false,
-                                          "actionType": "drawer",
-                                          "drawer": {
-                                            "$ref": "modal-ref-2"
-                                          }
-                                        }
-                                      ]
-                                    }
-                                  }
-                                },
-                             {{each options}}
-                               {
-                              "type": "button",
-                              "label": "{{$value.text}}",
-                              "onEvent": {
-                                "click": {
-                                  "actions": []
-                                }
-                              },
-                              "level": "success"
-                            }
-                              {{if $index != options.length - 1}},{{/if}}
-                             {{/each}}
-                          ],
-                          "style": {
-                            "position": "relative",
-                            "display": "flex",
-                            "flex": "0 0 auto",
-                            "inset": "auto",
-                            "flexWrap": "nowrap",
-                            "alignItems": "baseline"
-                          },
-                          "size": "none",
-                          "wrapperBody": false,
-                          "isFixedHeight": false
-                        }
-                      ],
-                      "wrapperBody": false,
-                      "style": {
-                        "flex": "1 1 auto",
-                        "position": "static",
-                        "display": "flex",
-                        "flexWrap": "nowrap",
-                        "justifyContent": "space-between",
-                        "alignItems": "baseline",
-                        "flexGrow": 1
-                      },
-                      "isFixedHeight": false,
-                      "wrapperCustomStyle": {
-                        "height": "auto"
-                      }
-                    }
-                  ]
-                }
-              ],
-              "footerToolbar": [
-                {
-                  "type": "flex",
-                  "direction": "row",
-                  "justify": "flex-start",
-                  "alignItems": "stretch",
-                  "style": {
-                    "position": "static"
-                  },
-                  "items": [
-                    {
-                      "type": "container",
-                      "align": "right",
-                      "body": [
-                        {
-                          "type": "pagination",
-                          "behavior": "Pagination",
-                          "layout": [
-                            "total",
-                            "perPage",
-                            "pager"
-                          ],
-                          "perPage": 10,
-                          "perPageAvailable": [
-                            10,
-                            20,
-                            50,
-                            100
-                          ],
-                          "align": "right"
-                        }
-                      ],
-                      "wrapperBody": false,
-                      "style": {
-                        "flexGrow": 1,
-                        "flex": "1 1 auto",
-                        "position": "static",
-                        "display": "flex",
-                        "flexBasis": "auto",
-                        "flexDirection": "row",
-                        "flexWrap": "nowrap",
-                        "alignItems": "stretch",
-                        "justifyContent": "flex-end"
-                      }
-                    }
-                  ]
-                }
-              ],
-              "columns": [
-                {{each columns}}
+              }
+            },
+            "level": "success"
+          },
+          {
+            "type": "button",
+            "label": "重置",
+            "onEvent": {
+              "click": {
+                "weight": 0,
+                "actions": [
                   {
-                    "type": "tpl",
-                    "title": "{{$value.columnComment}}",
-                    "name": "{{$value.columnName}}" 
-                  },
-                {{/each}}
+                    "componentId": "u:1556dcd479ab",
+                    "ignoreError": false,
+                    "actionType": "reset"
+                  }
+                ]
+              }
+            },
+            "level": "default"
+          }
+        ]
+      },
+      "headerToolbar": [
+        {
+          "type": "flex",
+          "direction": "row",
+          "justify": "flex-start",
+          "alignItems": "stretch",
+          "style": {
+            "position": "static"
+          },
+          "items": [
+            {
+              "type": "container",
+              "align": "left",
+              "behavior": [
+                "Insert",
+                "BulkEdit",
+                "BulkDelete"
+              ],
+              "body": [
                 {
-                  "type": "operation",
-                  "title": "操作",
-                  "buttons": [
-                    {{each tableConfig.actions}}
-                      {{$value}}{{if $index != tableConfig.actions.length - 1}},{{/if}}
+                  "type": "container",
+                  "body": [
+                    {
+                      "type": "tpl",
+                      {{if tableConfig.title}} "tpl": "{{tableConfig.title}}",{{/if}}
+                      "inline": true,
+                      "className": "page_title"
+                    }
+                  ],
+                  "style": {
+                    "position": "relative",
+                    "display": "flex",
+                    "inset": "auto",
+                    "flexWrap": "nowrap",
+                    "flexDirection": "column",
+                    "alignItems": "flex-start"
+                  },
+                  "size": "none",
+                  "wrapperBody": false
+                },
+                {
+                  "type": "container",
+                  "body": [
+                    {
+                      "type": "button",
+                      "label": "新建",
+                      "level": "success",
+                      "size": "sm",
+                      "onEvent": {
+                        "click": {
+                          "weight": 0,
+                          "actions": [
+                            {
+                              "ignoreError": false,
+                              "actionType": "drawer",
+                              "drawer": {
+                                "$ref": "modal-ref-2"
+                              }
+                            }
+                          ]
+                        }
+                      }
+                    },
+                    {{each options}}
+                      {
+                        "type": "button",
+                        "label": "{{$value.text}}",
+                        "onEvent": {
+                          "click": {
+                            "actions": []
+                          }
+                        },
+                        "size": "{{$value.size}}",
+                        "level": "{{$value.level}}"
+                      }
+                    {{if $index != options.length - 1}},{{/if}}
                     {{/each}}
-                  ]
+                  ],
+                  "style": {
+                    "position": "relative",
+                    "display": "flex",
+                    "flex": "0 0 auto",
+                    "inset": "auto",
+                    "flexWrap": "nowrap",
+                    "alignItems": "baseline"
+                  },
+                  "size": "none",
+                  "wrapperBody": false,
+                  "isFixedHeight": false
                 }
               ],
-              "showHeader": true,
-              "title": null,
-              "resizable": true
+              "wrapperBody": false,
+              "style": {
+                "flex": "1 1 auto",
+                "position": "static",
+                "display": "flex",
+                "flexWrap": "nowrap",
+                "justifyContent": "space-between",
+                "alignItems": "baseline",
+                "flexGrow": 1
+              },
+              "isFixedHeight": false,
+              "wrapperCustomStyle": {
+                "height": "auto"
+              }
             }
-  ],
+          ]
+        }
+      ],
+      "footerToolbar": [
+        {
+          "type": "flex",
+          "direction": "row",
+          "justify": "flex-start",
+          "alignItems": "stretch",
+          "style": {
+            "position": "static"
+          },
+          "items": [
+            {
+              "type": "container",
+              "align": "right",
+              "body": [
+                {
+                  "type": "pagination",
+                  "behavior": "Pagination",
+                  "layout": [
+                    "total",
+                    "perPage",
+                    "pager"
+                  ],
+                  "perPage": 10,
+                  "perPageAvailable": [
+                    10,
+                    20,
+                    50,
+                    100
+                  ],
+                  "align": "right"
+                }
+              ],
+              "wrapperBody": false,
+              "style": {
+                "flexGrow": 1,
+                "flex": "1 1 auto",
+                "position": "static",
+                "display": "flex",
+                "flexBasis": "auto",
+                "flexDirection": "row",
+                "flexWrap": "nowrap",
+                "alignItems": "stretch",
+                "justifyContent": "flex-end"
+              }
+            }
+          ]
+        }
+      ],
+      "columns": [
+        {{each _editFormList}}
+          {
+          "type": "tpl",
+          "title": "{{$value.columnComment}}",
+          "name": "{{$value.columnName}}"
+          },
+        {{/each}}
+        {
+          "type": "operation",
+          "title": "操作",
+          "buttons": [
+            {{each tableConfig.actions}}
+              {{$value}}
+              {{if $index != tableConfig.actions.length - 1}},{{/if}}
+            {{/each}}
+          ]
+        }
+      ],
+      "showHeader": true,
+      "title": null,
+      "resizable": true
+  },
   "pullRefresh": {
     "disabled": true
   },
@@ -441,14 +442,14 @@
           "dsType": "api",
           "feat": "Insert",
           "body": [
-            {{each columns}}
+            {{each _editFormList}}
               {
                 "name": "{{$value.columnName}}",
                 "label": "{{$value.columnComment}}",
                 "type": "{{formTagsT[$value.htmlType] || $value.htmlType}}",
                 "colSize": "1/4",
                 "required": true
-              }{{if $index != columns.length - 1}},{{/if}}
+              }{{if $index != _editFormList.length - 1}},{{/if }}
             {{/each}}
           ],
           "actions": [
@@ -516,12 +517,31 @@
   "data": {
     "LOV_LOC_type": [
       {
-        "label": "默认",
+        "label": "默认Static",
         "value": "1"
       },
       {
-        "label": "SQL",
+        "label": "SQLStatic",
         "value": "2"
+      }
+    ],
+    "LOV_SEX": [
+      {
+        "label": "男Static",
+        "value": "1"
+      },
+       {
+        "label": "女Static",
+        "value": "2"
+      }
+    ],
+    "LOV_status": [
+      {
+        "label": "正常Static",
+        "value": "0"
+      }, {
+        "label": "停用Static",
+        "value": "1"
       }
     ]
   },
@@ -542,6 +562,20 @@
     },
     ".page_collapse": {
       "width": "100%"
+    }
+  },
+  "id": "top_page",
+  "onEvent": {
+    "init": {
+      "weight": 0,
+      "actions": [
+        {
+          "ignoreError": false,
+          "actionType": "custom",
+          "script": "/* 自定义JS使用说明：\n  * 1.动作执行函数doAction，可以执行所有类型的动作\n  * 2.通过上下文对象context可以获取当前组件实例，例如context.props可以获取该组件相关属性\n  * 3.事件对象event，在doAction之后执行event.stopPropagation();可以阻止后续动作执行\n*/\n\nfetch(\"http://111.231.7.32:40001/mock/11/amis/getLov?type=LOV_status\")\n  .then((response) => response.json())\n  .then((res) => {\n    doAction({\n      actionType: 'setValue',\n      componentId: 'top_page',\n      args: {\n        value: {\n          LOV_status: res\n        }\n      }\n    })\n  });\n\n\nfetch(\"http://111.231.7.32:40001/mock/11/amis/getLov?type=LOV_SEX\")\n  .then((response) => response.json())\n  .then((res) => {\n    doAction({\n      actionType: 'setValue',\n      componentId: 'top_page',\n      args: {\n        value: {\n          LOV_SEX: res\n        }\n      }\n    })\n  });\n\n\n\n    \n",
+          "args": {}
+        }
+      ]
     }
   }
 }

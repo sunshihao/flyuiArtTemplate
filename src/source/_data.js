@@ -3,45 +3,43 @@ const { entries } = require("lodash");
 exports.tableSetting = {
   code: 0,
   data: {
-    entity: {
-      id: 1,
-      scene: 1,
-      tableName: "system_users",
-      tableComment: "用户信息表",
-      remark: null,
-      moduleName: "system",
-      businessName: "users",
-      className: "Users",
-      classComment: "用户信息",
-      author: "admin",
-      templateType: 1,
-      frontType: 20,
-      parentMenuId: null,
-      masterTableId: null,
-      subJoinColumnId: null,
-      subJoinMany: null,
-      treeParentColumnId: null,
-      treeNameColumnId: null,
-      dataSourceConfigId: 0,
-      createTime: 1710593860000,
-      updateTime: 1712900473000,
-      name: "",
-      enable_api: true,
-      enable_audit: true,
-      enable_chatter: false,
-      enable_events: false,
-      enable_files: true,
-      enable_inline_edit: true,
-      enable_instances: false,
-      enable_notes: false,
-      enable_search: true,
-      enable_tasks: false,
-      enable_trash: true,
-      enable_workflow: true,
-      enable_enhanced_lookup: true,
-      icon: "",
-      is_enable: true,
-    },
+    id: 1,
+    scene: 1,
+    tableName: "system_users",
+    tableComment: "用户信息表",
+    remark: null,
+    moduleName: "system",
+    businessName: "users",
+    className: "Users",
+    classComment: "用户信息",
+    author: "admin",
+    templateType: 1,
+    frontType: 20,
+    parentMenuId: null,
+    masterTableId: null,
+    subJoinColumnId: null,
+    subJoinMany: null,
+    treeParentColumnId: null,
+    treeNameColumnId: null,
+    dataSourceConfigId: 0,
+    createTime: 1710593860000,
+    updateTime: 1712900473000,
+    name: "",
+    enable_api: true,
+    enable_audit: true,
+    enable_chatter: false,
+    enable_events: false,
+    enable_files: true,
+    enable_inline_edit: true,
+    enable_instances: false,
+    enable_notes: false,
+    enable_search: true,
+    enable_tasks: false,
+    enable_trash: true,
+    enable_workflow: true,
+    enable_enhanced_lookup: true,
+    icon: "",
+    is_enable: true,
     columns: [
       {
         id: 2248,
@@ -64,6 +62,10 @@ exports.tableSetting = {
         listOperationResult: null,
         htmlType: "input",
         createTime: 1710593860000,
+        // --- fly-ui 原始数据
+        // --- 华炎魔方填充
+        searchable: false, // 可搜索
+        hidden: true // 忽略此字段
       },
       {
         id: 2249,
@@ -86,6 +88,7 @@ exports.tableSetting = {
         listOperationResult: null,
         htmlType: "input",
         createTime: 1710593860000,
+        searchable: true
       },
       {
         id: 2250,
@@ -108,6 +111,7 @@ exports.tableSetting = {
         listOperationResult: null,
         htmlType: "input",
         createTime: 1710593860000,
+        searchable: false
       },
       {
         id: 2251,
@@ -130,6 +134,7 @@ exports.tableSetting = {
         listOperationResult: null,
         htmlType: "input",
         createTime: 1710593860000,
+        searchable: true
       },
       {
         id: 2252,
@@ -152,6 +157,7 @@ exports.tableSetting = {
         listOperationResult: null,
         htmlType: "input",
         createTime: 1710593860000,
+        searchable: true
       },
       {
         id: 2253,
@@ -174,6 +180,7 @@ exports.tableSetting = {
         listOperationResult: null,
         htmlType: "input",
         createTime: 1710593860000,
+        searchable: false
       },
       {
         id: 2254,
@@ -196,6 +203,7 @@ exports.tableSetting = {
         listOperationResult: null,
         htmlType: "input",
         createTime: 1710593860000,
+        searchable: false
       },
       {
         id: 2255,
@@ -218,6 +226,7 @@ exports.tableSetting = {
         listOperationResult: null,
         htmlType: "input",
         createTime: 1710593860000,
+        searchable: false
       },
       {
         id: 2256,
@@ -240,6 +249,7 @@ exports.tableSetting = {
         listOperationResult: null,
         htmlType: "input",
         createTime: 1710593860000,
+        searchable: true
       },
       {
         id: 2257,
@@ -261,7 +271,10 @@ exports.tableSetting = {
         listOperationCondition: null,
         listOperationResult: null,
         htmlType: "radio",
+
         createTime: 1710593860000,
+        searchable: true,
+        options: "LOV_SEX"
       },
       {
         id: 2258,
@@ -284,6 +297,7 @@ exports.tableSetting = {
         listOperationResult: null,
         htmlType: "input",
         createTime: 1710593860000,
+        searchable: false
       },
       {
         id: 2259,
@@ -306,6 +320,32 @@ exports.tableSetting = {
         listOperationResult: null,
         htmlType: "radio",
         createTime: 1710593860000,
+        searchable: true,
+        options: "LOV_status"
+      },
+      {
+        id: 2259,
+        tableId: 1,
+        columnName: "status1",
+        dataType: "TINYINT",
+        columnComment: "帐号状态(下拉)（0正常 1停用）",
+        nullable: false,
+        primaryKey: false,
+        autoIncrement: false,
+        ordinalPosition: 12,
+        javaType: "Integer",
+        javaField: "status1",
+        dictType: "",
+        example: "1",
+        createOperation: true,
+        updateOperation: true,
+        listOperation: null,
+        listOperationCondition: null,
+        listOperationResult: null,
+        htmlType: "select",
+        createTime: 1710593860000,
+        searchable: true,
+        options: "LOV_status"
       },
       {
         id: 2260,
@@ -328,6 +368,7 @@ exports.tableSetting = {
         listOperationResult: null,
         htmlType: "input",
         createTime: 1710593860000,
+        searchable: false
       },
       {
         id: 2261,
@@ -350,6 +391,7 @@ exports.tableSetting = {
         listOperationResult: null,
         htmlType: "datetime",
         createTime: 1710593860000,
+        searchable: false
       },
       {
         id: 2262,
@@ -372,6 +414,7 @@ exports.tableSetting = {
         listOperationResult: null,
         htmlType: "input",
         createTime: 1710593860000,
+        searchable: false
       },
       {
         id: 2263,
@@ -394,6 +437,8 @@ exports.tableSetting = {
         listOperationResult: null,
         htmlType: "datetime",
         createTime: 1710593860000,
+        searchable: false,
+        hidden: true // 忽略此字段
       },
       {
         id: 2264,
@@ -416,6 +461,8 @@ exports.tableSetting = {
         listOperationResult: null,
         htmlType: "input",
         createTime: 1710593860000,
+        searchable: false,
+        hidden: true // 忽略此字段
       },
       {
         id: 2265,
@@ -438,6 +485,8 @@ exports.tableSetting = {
         listOperationResult: null,
         htmlType: "datetime",
         createTime: 1710593860000,
+        searchable: false,
+        hidden: true // 忽略此字段
       },
       {
         id: 2266,
@@ -460,6 +509,8 @@ exports.tableSetting = {
         listOperationResult: null,
         htmlType: "radio",
         createTime: 1710593860000,
+        searchable: false,
+        hidden: true // 忽略此字段
       },
       {
         id: 2267,
@@ -482,6 +533,8 @@ exports.tableSetting = {
         listOperationResult: null,
         htmlType: "input",
         createTime: 1710593860000,
+        searchable: false,
+        hidden: true // 忽略此字段
       },
     ],
   },

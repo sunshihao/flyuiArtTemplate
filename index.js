@@ -21,7 +21,7 @@ const initFlyUIData = () => {
   // 模拟码值数据源
 
   // 数据拼接
-  const { columns: _columns, table } = tableSetting.data;
+  const source = tableSetting.data;
 
   // 数据源table行编辑
   let tableOptions = [
@@ -45,17 +45,25 @@ const initFlyUIData = () => {
   ];
 
   const actions = [
-    {
-      text: "新增(模板)",
-    },
+    // {
+    //   text: "新增(模板)",
+    //   size: "sm",
+    //   type: "add"
+    // },
     {
       text: "批量删除(模板)",
+      size: "sm",
+      level: "warning",
     },
     {
       text: "导入(模板)",
+      size: "sm",
+      level: "primary",
     },
     {
       text: "导出(模板)",
+      size: "sm",
+      level: "primary",
     },
   ];
 
@@ -120,55 +128,17 @@ const initFlyUIData = () => {
     };
   });
 
-  const items = [];
-
-  const tableItems = [];
-
-  const split = 3;
-
-  const tableSplit = 2;
-
-  const columns = _columns.map((item) => {
-    if (item.createOperation) {
-      items.push({
-        md: split,
-        body: [
-          {
-            name: item.columnName,
-            label: item.columnComment,
-            type: formTagsT[item.htmlType] || item.htmlType, //
-            mode: "normal", // 固定参数
-            labelAlign: "top",
-          },
-        ],
-      });
-
-      tableItems.push({
-        name: item.columnName,
-        label: item.columnComment,
-        type: formTagsT[item.htmlType] || item.htmlType, //
-        colSize: `1/${tableSplit}`,
-        required: true,
-      });
-    }
-
-    // 理论仅展示
-    return {
-      type: "tpl", // 类型转换
-      title: item.columnComment,
-      name: item.columnName,
-    };
-  });
+  const lovType = ["LOV_status", "LOV_LOC_type", "LOV_SEX"];
 
   const obj = {
+    lovType,
     formTagsT, // 标签转换
-    columns: _columns, // 顶部
-    title: "值列表查询(模板)",
-    query: true,
-    options: actions,
+    source, // 数据源
+    title: "值列表查询(模板)", // label
+    options: actions, //
     tableConfig: {
       title: "明细(模板)",
-      actions: tableOptions,
+      actions: tableOptions, // 表格操作列
     },
   };
 
