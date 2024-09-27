@@ -2,7 +2,7 @@ exports.tagsT = {
   input: "tpl",
 };
 
-exports.formTagsT = {
+exports.tagsTans = {
   input: "input-text", // 文本框
   textarea: "textarea", // 文本域
   select: "select", // 下拉框

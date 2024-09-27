@@ -27,16 +27,11 @@ const initFlyUIData = () => {
   let tableOptions = [
     {
       text: "查看(模板)",
+      type: "edit",
     },
     {
       text: "编辑(模板)",
       type: "edit",
-    },
-    {
-      text: "设置(模板)",
-    },
-    {
-      text: "翻译(模板)",
     },
     {
       text: "删除(模板)",
@@ -132,7 +127,6 @@ const initFlyUIData = () => {
 
   const obj = {
     lovType,
-    formTagsT, // 标签转换
     source, // 数据源
     title: "值列表查询(模板)", // label
     options: actions, //

@@ -1,6 +1,7 @@
 
 {{ set _queryFormList = source.columns.filter(item => item.searchable) || [] }}
 {{ set _editFormList = source.columns.filter(item => !item.hidden) || [] }}
+{{ set _tagsTans = { "input": "input-text", "textarea": "textarea", "select": "select", "radio": "radios", "checkbox": "checkboxes", "datetime": "input-date" } }}
 {
   "type": "page",
   "regions": [
@@ -10,11 +11,12 @@
     "type": "crud2",
     "mode": "table2",
     "dsType": "api",
+     "selectable": true,
     "syncLocation": true,
     "primaryField": "id",
     "loadType": "pagination",
     "api": {
-        "url": "http://111.231.7.32:40001/mock/11/amis/lov_page",
+        "url": "http://111.231.7.32:40001/mock/11/amis/amis/getTemplateList",
         "method": "get",
         "dataType": "json",
         "replaceData": false
@@ -48,7 +50,7 @@
                             {
                               "name": "{{$value.columnName}}",
                               "label": "{{$value.columnComment}}",
-                              "type": "{{formTagsT[$value.htmlType] || $value.htmlType}}",
+                              "type": "{{_tagsTans[$value.htmlType] || $value.htmlType}}",
                               {{if $value.options}} "source": "${<%= $value.options %>}", {{/if}}
                               "mode": "normal",
                               "labelAlign": "top"
@@ -101,9 +103,7 @@
                     "flexDirection": "row",
                     "alignItems": "center"
                   },
-                  "size": "none",
                   "wrapperBody": false,
-                  "isFixedHeight": false,
                   "isFixedWidth": false,
                   "wrapperCustomStyle": {
                     "root": {
@@ -186,12 +186,6 @@
           "items": [
             {
               "type": "container",
-              "align": "left",
-              "behavior": [
-                "Insert",
-                "BulkEdit",
-                "BulkDelete"
-              ],
               "body": [
                 {
                   "type": "container",
@@ -211,7 +205,6 @@
                     "flexDirection": "column",
                     "alignItems": "flex-start"
                   },
-                  "size": "none",
                   "wrapperBody": false
                 },
                 {
@@ -260,7 +253,6 @@
                     "flexWrap": "nowrap",
                     "alignItems": "baseline"
                   },
-                  "size": "none",
                   "wrapperBody": false,
                   "isFixedHeight": false
                 }
@@ -275,7 +267,6 @@
                 "alignItems": "baseline",
                 "flexGrow": 1
               },
-              "isFixedHeight": false,
               "wrapperCustomStyle": {
                 "height": "auto"
               }
@@ -350,87 +341,12 @@
           ]
         }
       ],
-      "showHeader": true,
-      "title": null,
-      "resizable": true
+      "showHeader": true
   },
   "pullRefresh": {
     "disabled": true
   },
   "definitions": {
-    "modal-ref-1": {
-      "type": "drawer",
-      "body": [
-        {
-          "type": "crud2",
-          "mode": "table2",
-          "dsType": "api",
-          "syncLocation": true,
-          "primaryField": "id",
-          "loadType": "pagination",
-          "headerToolbar": [],
-          "footerToolbar": [],
-          "columns": [
-            {
-              "type": "tpl",
-              "title": "列名",
-              "name": "lovField"
-            },
-            {
-              "type": "tpl",
-              "title": "对照值",
-              "name": "name"
-            },
-            {
-              "type": "tpl",
-              "title": "中文",
-              "name": "name"
-            },
-            {
-              "type": "tpl",
-              "title": "English",
-              "name": "name"
-            },
-            {
-              "type": "tpl",
-              "title": "日本语",
-              "name": "name"
-            }
-          ],
-          "editorSetting": {
-            "mock": {
-              "enable": false,
-              "maxDisplayRows": 2
-            }
-          },
-          "api": {
-            "url": "http://111.231.7.32:40001/mock/11/amis/translate",
-            "method": "get"
-          }
-        }
-      ],
-      "title": "翻译",
-      "actions": [
-        {
-          "type": "button",
-          "actionType": "cancel",
-          "label": "取消"
-        },
-        {
-          "type": "button",
-          "actionType": "confirm",
-          "label": "确定",
-          "primary": true
-        }
-      ],
-      "showCloseButton": true,
-      "closeOnOutside": false,
-      "closeOnEsc": false,
-      "showErrorMsg": true,
-      "showLoading": true,
-      "draggable": false,
-      "actionType": "drawer"
-    },
     "modal-ref-2": {
       "type": "drawer",
       "body": [
@@ -446,9 +362,10 @@
               {
                 "name": "{{$value.columnName}}",
                 "label": "{{$value.columnComment}}",
-                "type": "{{formTagsT[$value.htmlType] || $value.htmlType}}",
-                "colSize": "1/4",
-                "required": true
+                "type": "{{_tagsTans[$value.htmlType] || $value.htmlType}}",
+                {{if $value.options}} "source": "${<%= $value.options %>}", {{/if}}
+                "colSize": "1/2",
+                "required": "{{$value.required}}"
               }{{if $index != _editFormList.length - 1}},{{/if }}
             {{/each}}
           ],

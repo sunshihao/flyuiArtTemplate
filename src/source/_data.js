@@ -1,5 +1,4 @@
-const { entries } = require("lodash");
-
+// 页面配置元
 exports.tableSetting = {
   code: 0,
   data: {
@@ -64,6 +63,7 @@ exports.tableSetting = {
         createTime: 1710593860000,
         // --- fly-ui 原始数据
         // --- 华炎魔方填充
+        required: false, // 必填
         searchable: false, // 可搜索
         hidden: true // 忽略此字段
       },
@@ -88,6 +88,7 @@ exports.tableSetting = {
         listOperationResult: null,
         htmlType: "input",
         createTime: 1710593860000,
+        required: true,
         searchable: true
       },
       {
@@ -111,6 +112,7 @@ exports.tableSetting = {
         listOperationResult: null,
         htmlType: "input",
         createTime: 1710593860000,
+        required: true,
         searchable: false
       },
       {
@@ -134,6 +136,7 @@ exports.tableSetting = {
         listOperationResult: null,
         htmlType: "input",
         createTime: 1710593860000,
+        required: true,
         searchable: true
       },
       {
@@ -180,6 +183,7 @@ exports.tableSetting = {
         listOperationResult: null,
         htmlType: "input",
         createTime: 1710593860000,
+        required: true,
         searchable: false
       },
       {
@@ -226,6 +230,7 @@ exports.tableSetting = {
         listOperationResult: null,
         htmlType: "input",
         createTime: 1710593860000,
+        required: true,
         searchable: false
       },
       {
@@ -249,12 +254,13 @@ exports.tableSetting = {
         listOperationResult: null,
         htmlType: "input",
         createTime: 1710593860000,
+        required: true,
         searchable: true
       },
       {
         id: 2257,
         tableId: 1,
-        columnName: "sex",
+        columnName: "",
         dataType: "TINYINT",
         columnComment: "用户性别",
         nullable: true,
@@ -271,7 +277,7 @@ exports.tableSetting = {
         listOperationCondition: null,
         listOperationResult: null,
         htmlType: "radio",
-
+        required: true,
         createTime: 1710593860000,
         searchable: true,
         options: "LOV_SEX"
@@ -304,7 +310,7 @@ exports.tableSetting = {
         tableId: 1,
         columnName: "status",
         dataType: "TINYINT",
-        columnComment: "帐号状态（0正常 1停用）",
+        columnComment: "帐号状态",
         nullable: false,
         primaryKey: false,
         autoIncrement: false,
@@ -318,9 +324,10 @@ exports.tableSetting = {
         listOperation: null,
         listOperationCondition: null,
         listOperationResult: null,
-        htmlType: "radio",
+        htmlType: "checkbox",
         createTime: 1710593860000,
         searchable: true,
+        required: true,
         options: "LOV_status"
       },
       {
@@ -328,7 +335,7 @@ exports.tableSetting = {
         tableId: 1,
         columnName: "status1",
         dataType: "TINYINT",
-        columnComment: "帐号状态(下拉)（0正常 1停用）",
+        columnComment: "帐号状态(下拉)",
         nullable: false,
         primaryKey: false,
         autoIncrement: false,
