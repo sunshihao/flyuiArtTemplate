@@ -589,7 +589,7 @@
         {
           "ignoreError": false,
           "actionType": "custom",
-          "script": "/* 自定义JS使用说明：\n  * 1.动作执行函数doAction，可以执行所有类型的动作\n  * 2.通过上下文对象context可以获取当前组件实例，例如context.props可以获取该组件相关属性\n  * 3.事件对象event，在doAction之后执行event.stopPropagation();可以阻止后续动作执行\n*/\n\nfetch(\"http://111.231.7.32:40001/mock/11/amis/getLov?type=LOV_status\")\n  .then((response) => response.json())\n  .then((res) => {\n    doAction({\n      actionType: 'setValue',\n      componentId: 'top_page',\n      args: {\n        value: {\n          LOV_status: res\n        }\n      }\n    })\n  });\n\n\nfetch(\"http://111.231.7.32:40001/mock/11/amis/getLov?type=LOV_SEX\")\n  .then((response) => response.json())\n  .then((res) => {\n    doAction({\n      actionType: 'setValue',\n      componentId: 'top_page',\n      args: {\n        value: {\n          LOV_SEX: res\n        }\n      }\n    })\n  });\n\n\n\n    \n",
+          "script": "fetch(\"http://111.231.7.32:40001/mock/11/amis/getLov?type=LOV_status\")\n  .then((response) => response.json())\n  .then((res) => {\n    doAction({\n      actionType: 'setValue',\n      componentId: 'top_page',\n      args: {\n        value: {\n          LOV_status: res\n        }\n      }\n    })\n  });\n\n\nfetch(\"http://111.231.7.32:40001/mock/11/amis/getLov?type=LOV_SEX\")\n  .then((response) => response.json())\n  .then((res) => {\n    doAction({\n      actionType: 'setValue',\n      componentId: 'top_page',\n      args: {\n        value: {\n          LOV_SEX: res\n        }\n      }\n    })\n  });\n\n\n\n    \n",
           "args": {}
         }
       ]
