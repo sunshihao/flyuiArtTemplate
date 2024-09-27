@@ -39,6 +39,12 @@ exports.tableSetting = {
     enable_enhanced_lookup: true,
     icon: "",
     is_enable: true,
+    enable_add: true, // 新增
+    enable_edit: true, // 编辑
+    enable_del: true, // 删除
+    enable_query: true, // 行-查看
+    enable_import: true, // 导入
+    enable_export: true, // 导出
     columns: [
       {
         id: 2248,
@@ -158,9 +164,11 @@ exports.tableSetting = {
         listOperation: null,
         listOperationCondition: null,
         listOperationResult: null,
-        htmlType: "input",
+        htmlType: "textarea",
         createTime: 1710593860000,
-        searchable: true
+        searchable: true,
+        maxLength: 5,
+        defaultValue: '默认备注' // 默认数据
       },
       {
         id: 2253,
@@ -260,7 +268,7 @@ exports.tableSetting = {
       {
         id: 2257,
         tableId: 1,
-        columnName: "",
+        columnName: "sex",
         dataType: "TINYINT",
         columnComment: "用户性别",
         nullable: true,
@@ -374,6 +382,7 @@ exports.tableSetting = {
         listOperationCondition: null,
         listOperationResult: null,
         htmlType: "input",
+        readOnly: true,
         createTime: 1710593860000,
         searchable: false
       },
@@ -397,6 +406,7 @@ exports.tableSetting = {
         listOperationCondition: null,
         listOperationResult: null,
         htmlType: "datetime",
+        readOnly: true,
         createTime: 1710593860000,
         searchable: false
       },
@@ -420,6 +430,7 @@ exports.tableSetting = {
         listOperationCondition: null,
         listOperationResult: null,
         htmlType: "input",
+        readOnly: true,
         createTime: 1710593860000,
         searchable: false
       },
@@ -469,6 +480,7 @@ exports.tableSetting = {
         htmlType: "input",
         createTime: 1710593860000,
         searchable: false,
+        readOnly: true,
         hidden: true // 忽略此字段
       },
       {

@@ -139,24 +139,6 @@
           },
           {
             "type": "button",
-            "label": "新建",
-            "onEvent": {
-              "click": {
-                "actions": [
-                  {
-                    "ignoreError": false,
-                    "actionType": "drawer",
-                    "drawer": {
-                      "$ref": "modal-ref-2"
-                    }
-                  }
-                ]
-              }
-            },
-            "level": "success"
-          },
-          {
-            "type": "button",
             "label": "重置",
             "onEvent": {
               "click": {
@@ -210,6 +192,7 @@
                 {
                   "type": "container",
                   "body": [
+                    {{if source.enable_add }}
                     {
                       "type": "button",
                       "label": "新建",
@@ -223,27 +206,85 @@
                               "ignoreError": false,
                               "actionType": "drawer",
                               "drawer": {
-                                "$ref": "modal-ref-2"
+                                "$ref": "modal-edit-ref"
+                              },
+                              "data": {
+                                "modelType": "add"
                               }
                             }
                           ]
                         }
+                      },
+                      "themeCss": {
+                        "className": {
+                        "padding-and-margin:default": {
+                            "marginLeft": "var(--sizes-size-5)"
+                          }
+                        }
                       }
                     },
-                    {{each options}}
+                    {{/if}}
+                    {{if source.enable_del }}
                       {
                         "type": "button",
-                        "label": "{{$value.text}}",
+                        "label": "批量删除",
                         "onEvent": {
                           "click": {
                             "actions": []
                           }
                         },
-                        "size": "{{$value.size}}",
-                        "level": "{{$value.level}}"
+                        "level": "warning",
+                        "size": "sm",
+                        "themeCss": {
+                        "className": {
+                        "padding-and-margin:default": {
+                            "marginLeft": "var(--sizes-size-5)"
+                          }
+                        }
+                        },
+                        "confirmText": "是否批量删除"
+                      },
+                    {{/if}}
+                    {{if source.enable_import }}
+                      {
+                        "type": "button",
+                        "label": "导入",
+                        "onEvent": {
+                          "click": {
+                            "actions": []
+                          }
+                        },
+                        "level": "primary",
+                        "size": "sm",
+                        "themeCss": {
+                        "className": {
+                        "padding-and-margin:default": {
+                            "marginLeft": "var(--sizes-size-5)"
+                          }
+                        }
+                        }
+                      },
+                    {{/if}}
+                    {{if source.enable_export }}
+                      {
+                        "type": "button",
+                        "label": "导出",
+                        "onEvent": {
+                          "click": {
+                            "actions": []
+                          }
+                        },
+                        "level": "primary",
+                        "size": "sm",
+                        "themeCss": {
+                        "className": {
+                        "padding-and-margin:default": {
+                            "marginLeft": "var(--sizes-size-5)"
+                          }
+                        }
+                        }
                       }
-                    {{if $index != options.length - 1}},{{/if}}
-                    {{/each}}
+                    {{/if}}
                   ],
                   "style": {
                     "position": "relative",
@@ -334,10 +375,73 @@
           "type": "operation",
           "title": "操作",
           "buttons": [
-            {{each tableConfig.actions}}
-              {{$value}}
-              {{if $index != tableConfig.actions.length - 1}},{{/if}}
-            {{/each}}
+            {{if source.enable_query }}
+              {
+                "type": "button",
+                "label": "查看",
+                "level": "link",
+                "behavior": "Edit",
+                "onEvent": {
+                  "click": {
+                    "actions": [
+                      {
+                        "actionType": "drawer",
+                        "drawer": {
+                          "$ref": "modal-edit-ref"
+                        }
+                      }
+                    ] 
+                  }
+                }
+              },
+            {{/if}}
+            {{if source.enable_edit }}
+              {
+                "type": "button",
+                "label": "编辑",
+                "level": "link",
+                "behavior": "Edit",
+                "onEvent": {
+                  "click": {
+                    "actions": [
+                      {
+                        "actionType": "drawer",
+                        "drawer": {
+                          "$ref": "modal-edit-ref"
+                        }
+                      }
+                    ] 
+                  }
+                }
+              },
+            {{/if}}
+            {{if source.enable_del }}
+              {
+                "type": "button",
+                "label": "删除",
+                "behavior": "Delete",
+                "className": "m-r-xs text-danger",
+                "level": "link",
+                "confirmText": "确认要删除数据",
+                "onEvent": {
+                  "click": {
+                    "actions": [
+                      {
+                        "actionType": "ajax",
+                        "data": {
+                          "&": "$$"
+                        }
+                      },
+                      {
+                        "actionType": "search",
+                        "groupType": "component",
+                        "componentId": "u:e537fbdd1ad1"
+                      }
+                    ]
+                  }
+                }
+             }
+            {{/if}}
           ]
         }
       ],
@@ -347,7 +451,7 @@
     "disabled": true
   },
   "definitions": {
-    "modal-ref-2": {
+    "modal-edit-ref": {
       "type": "drawer",
       "body": [
         {
@@ -360,13 +464,17 @@
           "body": [
             {{each _editFormList}}
               {
-                "name": "{{$value.columnName}}",
                 "label": "{{$value.columnComment}}",
                 "type": "{{_tagsTans[$value.htmlType] || $value.htmlType}}",
                 {{if $value.options}} "source": "${<%= $value.options %>}", {{/if}}
                 "colSize": "1/2",
                 "row": {{ (($index + 1) / 2).toFixed(0) }},
-                "required": "{{$value.required}}"
+                "required": "{{$value.required}}",
+                "value": "{{$value.defaultValue}}",
+                "readOnlyOn": "${IF({{$value.readOnly || false}}, true, false)}",
+                {{if $value.maxLength}} "maxLength": "${<%= $value.maxLength %>}", {{/if}}
+                "staticOn": "${IF(modelType!='add' && {{$value.readOnly || false}}, true, false)}",
+                "name": "{{$value.columnName}}"
               }{{if $index != _editFormList.length - 1}},{{/if }}
             {{/each}}
           ],
@@ -433,35 +541,9 @@
     }
   },
   "data": {
-    "LOV_LOC_type": [
-      {
-        "label": "默认Static",
-        "value": "1"
-      },
-      {
-        "label": "SQLStatic",
-        "value": "2"
-      }
-    ],
-    "LOV_SEX": [
-      {
-        "label": "男Static",
-        "value": "1"
-      },
-       {
-        "label": "女Static",
-        "value": "2"
-      }
-    ],
-    "LOV_status": [
-      {
-        "label": "正常Static",
-        "value": "0"
-      }, {
-        "label": "停用Static",
-        "value": "1"
-      }
-    ]
+    "LOV_LOC_type": [],
+    "LOV_SEX": [],
+    "LOV_status": []
   },
   "wrapperCustomStyle": {
     ".page_title": {
