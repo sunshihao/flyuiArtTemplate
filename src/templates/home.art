@@ -52,8 +52,11 @@
                               "label": "{{$value.columnComment}}",
                               "type": "{{_tagsTans[$value.htmlType] || $value.htmlType}}",
                               {{if $value.options}} "source": "${<%= $value.options %>}", {{/if}}
+                              {{if $value.maxLength}} "maxLength": <%= $value.maxLength %>, {{/if}}
                               "mode": "normal",
-                              "labelAlign": "top"
+                              "labelAlign": "top",
+                              "clearable": true
+
                             }
                           ]
                         }
@@ -366,7 +369,12 @@
       "columns": [
         {{each _editFormList}}
           {
-          "type": "tpl",
+          {{if $value.options}} 
+          "type": "mapping",
+          "source": "${<%= $value.options %>}",
+          {{else if !($value.options)}} 
+          "type": "tpl",  
+          {{/if}}
           "title": "{{$value.columnComment}}",
           "name": "{{$value.columnName}}"
           },
@@ -472,7 +480,7 @@
                 "required": "{{$value.required}}",
                 "value": "{{$value.defaultValue}}",
                 "readOnlyOn": "${IF({{$value.readOnly || false}}, true, false)}",
-                {{if $value.maxLength}} "maxLength": "${<%= $value.maxLength %>}", {{/if}}
+                {{if $value.maxLength}} "maxLength": <%= $value.maxLength %>, {{/if}}
                 "staticOn": "${IF(modelType!='add' && {{$value.readOnly || false}}, true, false)}",
                 "name": "{{$value.columnName}}"
               }{{if $index != _editFormList.length - 1}},{{/if }}
@@ -543,7 +551,16 @@
   "data": {
     "LOV_LOC_type": [],
     "LOV_SEX": [],
-    "LOV_status": []
+    "LOV_status": [
+      {
+        "label": "正常web",
+        "value": "0"
+      },
+      {
+        "label": "停用web",
+        "value": "1"
+      }
+    ]
   },
   "wrapperCustomStyle": {
     ".page_title": {
