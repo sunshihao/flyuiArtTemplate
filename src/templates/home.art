@@ -365,6 +365,7 @@
                 "type": "{{_tagsTans[$value.htmlType] || $value.htmlType}}",
                 {{if $value.options}} "source": "${<%= $value.options %>}", {{/if}}
                 "colSize": "1/2",
+                "row": {{ (($index + 1) / 2).toFixed(0) }},
                 "required": "{{$value.required}}"
               }{{if $index != _editFormList.length - 1}},{{/if }}
             {{/each}}

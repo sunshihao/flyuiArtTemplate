@@ -5,9 +5,9 @@ const template = require("art-template");
 const yaml = require("js-yaml");
 const schema = yaml.DEFAULT_SCHEMA.extend(require("js-yaml-js-types").all);
 const _ = require("lodash");
-const { holidays } = require("./src/yaml/holiday");
+// const { holidays } = require("./src/yaml/holiday");
 const { tableSetting } = require("./src/source/_data");
-const { tagsT, formTagsT } = require("./src/gramTrans/tag");
+// const { tagsT, formTagsT } = require("./src/gramTrans/tag");
 
 // 初始化 express 应用
 const app = express();
